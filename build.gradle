@@ -1,0 +1,49 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.1'
+    id 'java'
+}
+
+group 'com.github.unchai'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compileOnly('com.puppycrawl.tools:checkstyle:[8.18,)') {
+        exclude group: 'com.sun', module: 'tools'
+    }
+
+    implementation 'org.kohsuke:github-api:1.108'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testImplementation 'org.mockito:mockito-core:2.8.9'
+}
+
+gradlePlugin {
+    plugins {
+        checkstyleGithubPlugin {
+            id = 'com.github.unchai.checkstyle-github'
+            displayName = 'Checkstyle github pull request plugin'
+            description = 'A gradle plugin that leaves comment of the result of a "Checkstyle" on github\'s pull request.'
+            implementationClass = 'com.github.unchai.gradle.checkstyle.CheckstyleGithubPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/unchai/checkstyle-github-gradle-plugin'
+    vcsUrl = 'https://github.com/unchai/checkstyle-github-gradle-plugin'
+    tags = ['checkstyle', 'gradle', 'github', 'pull-requests']
+}
