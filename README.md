@@ -15,7 +15,7 @@ A gradle plug-in that leaves the result of a checkstyle of a project as a commen
 
 ```
 plugins {
-  id "com.github.unchai.checkstyle-github" version "0.0.2"
+  id "com.github.unchai.checkstyle-github" version "0.0.3"
 }
 
 checkstyleGithub {

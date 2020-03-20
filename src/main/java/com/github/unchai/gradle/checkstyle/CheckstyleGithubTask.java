@@ -55,6 +55,8 @@ public class CheckstyleGithubTask extends DefaultTask {
         final CheckstyleGithubPluginExtension extension =
             (CheckstyleGithubPluginExtension)this.getProject().getExtensions().getByName(CheckstyleGithubPlugin.TOOL_NAME);
 
+        extension.validate();
+
         final String projectDir = this.getProject().getProjectDir().getPath();
 
         final GithubHelper githubHelper;
