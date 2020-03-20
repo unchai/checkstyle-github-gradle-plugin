@@ -36,8 +36,6 @@ public class CheckstyleGithubPlugin implements Plugin<Project> {
         extension.setToolVersion(DEFAULT_CHECKSTYLE_VERSION);
         extension.setGhEndpoint(DEFAULT_GITHUB_ENDPOINT);
 
-        extension.validate();
-
         configuration.defaultDependencies(dependencies -> dependencies.add(
             project.getDependencies().create("com.puppycrawl.tools:checkstyle:" + extension.getToolVersion())
         ));
