@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-  id "com.github.unchai.checkstyle-github" version "0.0.1"
+  id "com.github.unchai.checkstyle-github" version "0.0.2"
 }
 
 checkstyleGithub {
