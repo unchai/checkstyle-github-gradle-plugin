@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.github.unchai'
-version '0.0.1'
+version '0.0.2-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly('com.puppycrawl.tools:checkstyle:[8.18,)') {
+    implementation('com.puppycrawl.tools:checkstyle:[8.29,)') {
         exclude group: 'com.sun', module: 'tools'
     }
 

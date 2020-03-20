@@ -21,13 +21,28 @@ package com.github.unchai.gradle.checkstyle;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.artifacts.Configuration;
 
 public class CheckstyleGithubPlugin implements Plugin<Project> {
+    public static final String TOOL_NAME = "checkstyleGithub";
+    private static final String DEFAULT_CHECKSTYLE_VERSION = "8.29";
+    private static final String DEFAULT_GITHUB_ENDPOINT = "https://api.github.com";
+
     @Override
     public void apply(Project project) {
-        project.getExtensions().create("checkstyleGithub", CheckstyleGithubPluginExtension.class);
+        final Configuration configuration = project.getConfigurations().create(TOOL_NAME);
 
-        final Task task = project.getTasks().create("checkstyleGithub", CheckstyleGithubTask.class);
+        final CheckstyleGithubPluginExtension extension = project.getExtensions().create(TOOL_NAME, CheckstyleGithubPluginExtension.class);
+        extension.setToolVersion(DEFAULT_CHECKSTYLE_VERSION);
+        extension.setGhEndpoint(DEFAULT_GITHUB_ENDPOINT);
+
+        extension.validate();
+
+        configuration.defaultDependencies(dependencies -> dependencies.add(
+            project.getDependencies().create("com.puppycrawl.tools:checkstyle:" + extension.getToolVersion())
+        ));
+
+        final Task task = project.getTasks().create(TOOL_NAME, CheckstyleGithubTask.class);
         task.setGroup("Lint");
         task.setDescription("A gradle plugin that leaves comment of the result of a \"Checkstyle\" on github's pull request.");
     }

@@ -53,9 +53,7 @@ public class CheckstyleGithubTask extends DefaultTask {
     @TaskAction
     public void action() {
         final CheckstyleGithubPluginExtension extension =
-            (CheckstyleGithubPluginExtension)this.getProject().getExtensions().getByName("checkstyleGithub");
-
-        extension.validate();
+            (CheckstyleGithubPluginExtension)this.getProject().getExtensions().getByName(CheckstyleGithubPlugin.TOOL_NAME);
 
         final String projectDir = this.getProject().getProjectDir().getPath();
 

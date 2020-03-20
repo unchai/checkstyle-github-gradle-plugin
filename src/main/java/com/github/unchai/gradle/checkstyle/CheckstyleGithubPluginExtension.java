@@ -25,11 +25,16 @@ import lombok.Data;
 
 @Data
 public class CheckstyleGithubPluginExtension {
-    private String ghEndpoint = "https://api.github.com";
+    private String toolVersion;
+    private String ghEndpoint;
     private String ghRepository;
     private String configLocation;
 
     void validate() {
+        if (StringUtils.isBlank(toolVersion)) {
+            throw new GradleException("'toolVersion' required!");
+        }
+
         if (StringUtils.isBlank(ghEndpoint)) {
             throw new GradleException("'ghEndpoint' required!");
         }
